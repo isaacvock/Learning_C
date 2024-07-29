@@ -1,2 +1,2 @@
 # Learning_C
-Code I write as a I learn C and low-level programming concepts
+Repository of code I write while learning C and low-level programming concepts
