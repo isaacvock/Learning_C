@@ -37,5 +37,24 @@ int main(void){
     scanf("%lld", &ll);
     printf("%lld\n", ll);
 
+
+    /* Character types */
+
+    char ch;
+    int i;
+
+    printf("i is: %d\n", i);
+    printf("ch is: %c\n", ch);
+
+    i = 'a';
+    printf("i is now: %d\n", i);
+    ch = 65;
+    printf("ch is now: %c\n", ch);
+    ch = ch + 1;
+    printf("ch is now: %c\n", ch);
+    ch++;
+    printf("ch is now: %c\n", ch);
+
+
     return(0);
 }
