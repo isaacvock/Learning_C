@@ -2,6 +2,19 @@
 
 int main(void){
 
+    /* Determine the length of a message */
+    int count = 0;
+    char ch2;
+
+    printf("Enter a message: ");
+    ch2 = getchar();
+    while(ch2 != '\n'){
+        count++;
+        ch2 = getchar();
+    }
+    printf("Your message was %d character(s) long.\n", count);
+
+
     /* Reading/Writing different int types */
     unsigned int u;
 
