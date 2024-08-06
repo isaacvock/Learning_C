@@ -1,7 +1,36 @@
 #include <stdio.h>
+#include <stdbool.h>
 #define N 10
 
 int main(void){
+
+    /* Check number of repeated digits */
+    int number;
+    int digit;
+    bool digit_seen[10] = {false}; /* 10 possible values for each digit */
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    while (number > 0){
+
+        digit = number % 10;
+        number = number / 10; /* Casting to int will throw out decimal */
+        
+        if(digit_seen[digit] == false){
+
+            digit_seen[digit] = true;
+
+        }else{
+
+            printf("Repeated digit\n");
+            break;
+
+        }
+
+    }
+
+
+
 
     /* Initialization of arrays */
     int d[5] = {1, 2, 3, 4, 5};
