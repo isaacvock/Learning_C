@@ -4,6 +4,44 @@
 #include <time.h>
 #include <math.h>
 
+#define N 10
+
+/* Function declaration*/
+double average(double a, double b);
+
+/* Quicksort*/
+void quicksort(int a[], int low, int high);
+
+/* Easy way to deal with multi-dim arrays as input */
+int sum_2d_array(int r, int c, int a[r][c]){
+
+    int i, j, sum = 0;
+
+    for(i = 0; i < r; i++){
+        for(j = 0; j < c; j++){
+
+            sum += a[i][j];
+
+        }
+    }
+
+    return sum;
+
+}
+
+/* Function to sum elements in an array */
+int sum_array(int a[], int n){
+
+    int i, sum = 0;
+
+    for(i = 0; i < n; i++){
+        sum += a[i];
+    }
+
+    return sum;
+
+}
+
 
 /* Check if a number is prime */
 bool check_prime(int n){
@@ -36,12 +74,45 @@ void print_count(int n){
     printf("T minus %d and counting\n", n);
 }
 
-/* Function to average 2 numbers */
-double average(double a, double b){
-    return (a + b) / 2;
-}
 
 int main(void){
+
+    /* Show off my Quicksort implementation*/
+    printf("Enter 10 numbers to be sorted: ");
+    
+
+    /* Showing off compound literals */
+    int total3;
+    total3 = sum_array((int []){3, 0, 3, 4, 1}, 5);
+
+    printf("On the fly total is %d\n", total3);
+
+    /* Show off 2d array sum */
+    int M[10][15], total2d;
+
+    for(int k = 0; k < 10; k++){
+        for(int l = 0; l < 15; l++){
+
+            M[k][l] = k + l;
+
+        }
+    }
+
+    total2d = sum_2d_array(10, 15, M);
+    printf("Your 2D array total is %d\n", total2d);
+
+    /* Show off sum_array */
+    int b[100], total;
+
+    for(int j = 0; j < 100; j++){
+
+        b[j] = j;
+
+    }
+
+    total = sum_array(b, 100); /* will be 0 */
+
+    printf("Your total is %d\n", total);
 
     /* Test if number is prime */
     int maybe_prime;
@@ -82,3 +153,13 @@ int main(void){
 
 }
 
+/* Function to average 2 numbers */
+double average(double a, double b){
+    return (a + b) / 2;
+}
+
+void quicksort(int a[], int low, int high){
+
+    
+
+}
