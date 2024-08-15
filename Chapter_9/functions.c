@@ -9,8 +9,10 @@
 /* Function declaration*/
 double average(double a, double b);
 
-/* Quicksort*/
+/* Quicksort declaration */
 void quicksort(int a[], int low, int high);
+
+int reorder(int a[], int low, int high);
 
 /* Easy way to deal with multi-dim arrays as input */
 int sum_2d_array(int r, int c, int a[r][c]){
@@ -79,6 +81,18 @@ int main(void){
 
     /* Show off my Quicksort implementation*/
     printf("Enter 10 numbers to be sorted: ");
+    int Q[N], i;
+    for(i = 0; i < N; i++){
+        scanf("%d", &Q[i]);
+    }
+
+    quicksort(Q, 0, N-1);
+
+    printf("In sorted order: ");
+    for(i = 0; i < N; i ++){
+        printf("%d", Q[i]);
+    }
+    printf("\n");
     
 
     /* Showing off compound literals */
@@ -160,6 +174,67 @@ double average(double a, double b){
 
 void quicksort(int a[], int low, int high){
 
-    
+    if(low == high){
+
+        return;
+
+    }else{
+
+        int pivotlocale = reorder(a, low, high);
+        quicksort(a, low, pivotlocale-1);
+        quicksort(a, high, pivotlocale+1);
+
+    }
+
+
+
+}
+
+int reorder(int a[], int low, int high){
+
+
+    int pivotpoint = a[low];
+    bool empty_high = false;
+    bool empty_low = true;
+
+    while(low != high){
+
+        while(empty_low & low != high){
+
+            if(a[high] < pivotpoint){
+
+                a[low] = a[high];
+                empty_high = true;
+                empty_low = false;
+
+            }else{
+
+                high -= 1;
+
+            }
+
+        }
+
+        while(empty_high & low != high){
+
+            if(a[low] >= pivotpoint){
+
+                a[high] = a[low];
+                empty_high = false;
+                empty_low = true;
+
+            }else{
+
+                low += 1;
+
+            }
+
+
+        }
+
+        a[low] = pivotpoint;
+
+
+    }
 
 }
