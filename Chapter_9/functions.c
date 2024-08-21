@@ -181,8 +181,22 @@ void quicksort(int a[], int low, int high){
     }else{
 
         int pivotlocale = reorder(a, low, high);
-        quicksort(a, low, pivotlocale-1);
-        quicksort(a, high, pivotlocale+1);
+
+        if(pivotlocale <= low){
+            quicksort(a, low, low);
+        }else{
+            quicksort(a, low, pivotlocale-1);
+        }
+
+        if(pivotlocale >= high){
+
+            quicksort(a, high, high);
+
+        }else{
+
+            quicksort(a, pivotlocale+1, high);
+
+        }
 
     }
 
@@ -192,49 +206,62 @@ void quicksort(int a[], int low, int high){
 
 int reorder(int a[], int low, int high){
 
-
     int pivotpoint = a[low];
     bool empty_high = false;
     bool empty_low = true;
 
-    while(low != high){
 
-        while(empty_low & low != high){
+    printf("high is %d\n", high);
+    printf("low is %d\n", low);
+    if(high < 0){
+        printf("oh fuck\n");
+        printf("high is %d\n", high);
+    }
+
+
+    while(low < high){
+
+        while(empty_low && low < high){
 
             if(a[high] < pivotpoint){
 
                 a[low] = a[high];
                 empty_high = true;
                 empty_low = false;
+                low++;
 
             }else{
 
-                high -= 1;
+                high--;
 
             }
 
         }
 
-        while(empty_high & low != high){
+        while(empty_high && low < high){
 
             if(a[low] >= pivotpoint){
 
                 a[high] = a[low];
                 empty_high = false;
                 empty_low = true;
+                high--;
 
             }else{
 
-                low += 1;
+                low++;
 
             }
 
 
         }
 
-        a[low] = pivotpoint;
 
 
     }
+
+    a[high] = pivotpoint;
+
+    return high;
 
 }
