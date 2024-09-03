@@ -25,6 +25,22 @@ int main(void){
         }
     }
 
+    int *w2;
+    for(w2 = X[3]; w2 < X[3] + 15; w2++){
+
+        *w2 = 1;
+
+    }
+
+
+    for(int y = 0; y < 10; y++){
+        for(int z = 0; z < 15; z++){
+
+            printf("Row %d column %d is: %d\n", y, z, X[y][z]);
+
+        }
+    }
+
     /* Reverse a series of numbers */
     int c[10];
     int *r = &c[0];
