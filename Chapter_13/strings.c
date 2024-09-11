@@ -2,6 +2,12 @@
 #include <stdbool.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
+
+/* Max number of reminders and max reminder length */
+#define MAX_REMIND 50
+#define MSG_LEN 60
+
 
 /* gets and scanf are trash */
 int read_line(char str[], int n);
@@ -11,6 +17,65 @@ int count_spaces(const char *s);
 int count_spaces2(const char s[]);
 
 int main(void){
+
+
+    /* One-Month Reminder List */
+    char reminders[MAX_REMIND][MSG_LEN+3];
+    char day_str[3], msg_str[MSG_LEN + 1];
+    int rcount = 0;
+    int day = 1;
+
+    for(;;){
+
+        if (rcount == MAX_REMIND){
+            printf("At capacity!");
+            break;
+        }
+
+        printf("Enter a day and a reminder: ");
+        scanf("%2d", &day);
+        if(day == 0){
+            break;
+        }
+
+        sprintf(day_str, "%2d", day);
+        read_line(msg_str, MSG_LEN);
+
+        
+
+    }
+
+
+    /* Playing around with the string library */
+    char str1[15];
+    char str2[] = "abcdefghijklmnopqrst";
+
+    strncpy(str1, str2, sizeof(str1) - 1);
+    str1[sizeof(str1) - 1] = '\0';
+    printf("str1 is: %s\n",str1);
+
+    int len = strlen(str1);
+    printf("str1 is %d characters long\n", len);
+
+    char str3[15 + sizeof(str2) - 1];
+    strcpy(str3, str1);
+    printf("str3 is %s\n", str3);
+    strcat(str3, str2);
+    printf("str3 is now %s\n", str3);
+
+    if(strcmp(str1, str2) < 0){
+
+        printf("str1 is less than str2\n");
+
+    }else if(strcmp(str1, str2) > 0){
+
+        printf("str1 is greater than str2\n");
+
+    }else{
+        
+        printf("str1 is equal to str2\n");
+
+    }
 
 
     /* Accessing the characters in a string */
