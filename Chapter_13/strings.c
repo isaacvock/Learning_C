@@ -24,6 +24,7 @@ int main(void){
     char day_str[3], msg_str[MSG_LEN + 1];
     int rcount = 0;
     int day = 1;
+    int i, j;
 
     for(;;){
 
@@ -41,8 +42,27 @@ int main(void){
         sprintf(day_str, "%2d", day);
         read_line(msg_str, MSG_LEN);
 
-        
+        /* Insert msg_str where it belongs */
+        for(i = 0; i<rcount; i++){
 
+            if(strcmp(day_str, reminders[i]) < 0){
+                break;
+            }
+
+        }
+        for(j = rcount; j > i; j--){
+            strcpy(reminders[j], reminders[j-1]);
+        }
+        strcpy(reminders[i], day_str);
+        strcat(reminders[i], msg_str);
+        
+        rcount++;
+
+    }
+
+    printf("\nDay Reminder\n");
+    for(i = 0; i < rcount; i++){
+        printf("%s\n", reminders[i]);
     }
 
 
