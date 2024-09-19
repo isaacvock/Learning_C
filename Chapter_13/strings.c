@@ -16,7 +16,14 @@ int read_line(char str[], int n);
 int count_spaces(const char *s);
 int count_spaces2(const char s[]);
 
+/* Some string idioms */
+size_t my_strlen(const char *s);
+
 int main(void){
+
+    /* String idioms */
+    char str_to_test[] = "I am a string!";
+    printf("string is %ld long\n", my_strlen(str_to_test));
 
 
     /* One-Month Reminder List */
@@ -194,4 +201,15 @@ int read_line(char str[], int n){
     str[i] = '\0';
     return i;
 
+}
+
+size_t my_strlen(const char *s){
+
+    size_t n = 0;
+
+    for(; *s; s++){
+        n++;
+    }
+
+    return n;
 }
