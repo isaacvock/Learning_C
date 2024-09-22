@@ -18,12 +18,30 @@ int count_spaces2(const char s[]);
 
 /* Some string idioms */
 size_t my_strlen(const char *s);
+char *my_strcat(char *s1, const char *s2);
+char *my_stroverwrite(char *s1, const char *s2);
+
 
 int main(void){
 
     /* String idioms */
     char str_to_test[] = "I am a string!";
     printf("string is %ld long\n", my_strlen(str_to_test));
+
+    char str_to_test2a[100] = "I am a string!";
+    char str_to_test2b[100] = "I am a better string";
+    char str_to_test3a[100] = "I am a string!";
+    char str_to_test3b[100] = "I am a better string";
+
+    printf("str_to_test2a was originally %s\n", str_to_test2a);
+    printf("str_to_test3a was originally %s\n", str_to_test3a);
+
+    my_strcat(str_to_test2a, str_to_test2b);
+    /* my_stroverwrite(str_to_test3a, str_to_test3b); */
+
+    printf("str_to_test2a is now %s\n", str_to_test2a);
+    printf("str_to_test3a is now %s\n", str_to_test3a);
+
 
 
     /* One-Month Reminder List */
@@ -206,10 +224,51 @@ int read_line(char str[], int n){
 size_t my_strlen(const char *s){
 
     size_t n = 0;
+    size_t n2 = 0;
 
-    for(; *s; s++){
-        n++;
+    while(*s++){
+        n2++;
     }
 
-    return n;
+    if(n2 != 14){
+        printf("Oh fuck\n");
+        printf("n is %ld\n", n);
+        printf("n2 is %ld\n", n2);
+    }else{
+        printf("Success\n");
+    }
+
+    return n2;
+}
+
+char *my_strcat(char *s1, const char *s2){
+
+    char *p = s1;
+
+    while(*p){
+        p++;
+    }
+
+    while(*p++ = *s2++){
+        ;
+    }
+
+    return s1;
+
+}
+
+
+char *my_stroverwrite(char *s1, const char *s2){
+
+
+    *s1 = *s2;
+
+    while(*s2++ && *s1++){
+
+        *s1 = *s2;
+
+    }
+
+    return(s1);
+
 }
