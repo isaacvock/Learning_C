@@ -22,7 +22,53 @@ char *my_strcat(char *s1, const char *s2);
 char *my_stroverwrite(char *s1, const char *s2);
 
 
-int main(void){
+int main(int argc, char *argv[]){
+
+    /* Check which strings are planet names*/
+    char *planets[] = {"Mercury", "Venus", "Earth",
+                       "Mars", "Jupiter", "Saturn",
+                       "Uranus", "Neptune", "Pluto"};
+
+    bool is_planet;
+    int planet_index;
+
+    for(int ap = 1; ap < argc; ap++){
+
+        is_planet = false;
+
+        for(int p = 0; p < 9; p++){
+
+            if(strcmp(planets[p], argv[ap]) == 0){
+
+                is_planet = true;
+                planet_index = p + 1;
+                break;
+
+            }
+
+        }
+
+        if(is_planet){
+            printf("%s is planet %d\n", argv[ap], planet_index);
+        }else{
+            printf("%s is not a planet\n", argv[ap]);
+        }
+    }
+
+
+    /* Command line arg parsing */
+    for(int a=0; a<argc; a++){
+        printf("Argument %d is %s\n", a, argv[a]);
+    }
+
+    /* Simulating a ragged array */
+    char *raggedy[] = {"Mercury", "Venus", "Earth",
+                       "Mars", "Jupiter", "Saturn",
+                       "Uranus", "Neptune", "Pluto"};
+
+    for(int p=0; p<9; p++){
+        printf("Planet %d is %s\n", p, raggedy[p]);
+    }
 
     /* String idioms */
     char str_to_test[] = "I am a string!";
