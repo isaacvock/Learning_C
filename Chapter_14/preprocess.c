@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /* Macros, some cursed */
 #define LOOP for(;;)
@@ -9,10 +10,33 @@ type type##_max(type x, type y) \
 {                               \
     return x > y ? x : y;       \
 }
+#define ECHO(s) (fgets(s, sizeof(s), stdin), puts(s))
 
 GENERIC_MAX(float)
 
 int main(int argc, char *argv[]){
+
+    int echo_flag;
+    char str[60];
+    printf("Echo string you provide? 1 = yes, 0 = no: ");
+    scanf("%d", &echo_flag);
+
+    if(echo_flag == 1){
+
+        printf("echo_flag was 1\n");
+        printf("Provide a string: ");
+        getchar();
+        ECHO(str);
+
+    }else{
+
+        printf("echo_flag was 0");
+        printf("Provide a string: ");
+        getchar();
+        fgets(str, sizeof(str), stdin);
+
+    }
+
     printf("Hello directives\n");
 
     int i = 1;
