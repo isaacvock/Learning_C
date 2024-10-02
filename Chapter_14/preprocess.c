@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 /* Macros, some cursed */
 #define LOOP for(;;)
@@ -11,10 +12,44 @@ type type##_max(type x, type y) \
     return x > y ? x : y;       \
 }
 #define ECHO(s) (fgets(s, sizeof(s), stdin), puts(s))
+#define DEBUG 0
+
 
 GENERIC_MAX(float)
 
 int main(int argc, char *argv[]){
+
+
+    int id = 1;
+    int jd = 2;
+
+
+
+    #if INT_MAX < 100000
+    #error int type is too small
+    #else
+    printf("%d\n", INT_MAX);
+    #endif 
+
+    #if DEBUG
+    printf("Value of id: %d\n", id);
+    printf("Value of jd: %d\n", jd);
+    #endif /* DEBUG */
+
+    #if defined(DEBUG)
+    printf("Value of id: %d\n", id);
+    printf("Value of jd: %d\n", jd);
+    #endif
+
+
+    #if DEBUG
+    printf("debugging!");
+    #elif defined(BEAN)
+    printf("Beans!");
+    #else
+    printf("Spoots!\n");
+    #endif
+
 
     int echo_flag;
     char str[60];
