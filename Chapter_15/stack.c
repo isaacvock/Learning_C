@@ -8,12 +8,6 @@ int top = 0;
 
 void make_empty(void){
 
-    for(int c = 0; c<100; c++){
-
-        contents[c] = -1;
-
-    }
-
     top = 0;
 
 }
@@ -46,13 +40,29 @@ int is_full(void){
 
 void push(int i){
 
-    contents[top] = 1;
-    top++;
+    if(top == 100){
+        printf("Stack overflow!");
+    }else{
+        contents[top] = i;
+        top++;
+    }
+
+
 
 }
 
 int pop(void){
 
-    return contents[top--];
+    if(top == 0){
+
+        print("Nothing to pop!\n");
+        return -1;
+
+    }else{
+
+        return contents[top--];
+
+    }
+
     
 }
