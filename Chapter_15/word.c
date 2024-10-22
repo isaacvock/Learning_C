@@ -23,7 +23,7 @@ void read_word(char *word, int len){
         }
         ch = read_char();
     }
-    word[pos] = '\0'
+    word[pos] = '\0';
 
 
 }
