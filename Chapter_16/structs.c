@@ -2,7 +2,23 @@
 #include <string.h>
 
 #define NAME_LEN 30
+#define FIRST_NAME_LEN 30
+#define LAST_NAME_LEN 30
 
+/* Nested structs */
+struct person_name {
+    char first[FIRST_NAME_LEN+1];
+    char middle_intitial;
+    char last[LAST_NAME_LEN+1];
+};
+
+struct student {
+    struct person_name name;
+    int id, age;
+    char sex;
+};
+
+/* Basic b structs */
 struct part {
     int number;
     char name[NAME_LEN + 1];
@@ -20,6 +36,38 @@ struct part build_part(int number, const char *name, int on_hand);
 
 int main(void){
 
+    /* Arrays of structs*/
+    struct part inventory[100];
+    inventory[0] = (struct part) {10, "bean", 1};
+    strcpy(inventory[1].name, "izzy");
+    inventory[1].number = 2;
+    inventory[1].on_hand = 1;
+    printf("ELEMENT 0: \n");
+    print_part(inventory[0]);
+    printf("ELEMENT 1: \n");
+    print_part(inventory[1]);
+    printf("Part's name is %s\n", inventory[0].name);
+    strcpy(inventory[0].name, "spoot");
+    printf("Part's name is now %s\n", inventory[0].name);
+
+    struct part inventory_i[100] = 
+        {[0].number = 528, [0].on_hand = 10, [0].name[0] = '\0'};
+    printf("ELEMENT 0 OF inventory_i: \n");
+    print_part(inventory_i[0]);
+
+    /* Nested structs */
+    struct student student1, student2;
+    struct person_name me = {"Isaac", 'W', "Vock"};
+    strcpy(student1.name.first, "Fred");
+    student2.name = me;
+
+    printf("student1's first name is %s\n", student1.name.first);
+    printf("student2's first name is %s\n", student2.name.first);
+
+    /* Compound literals and structs */
+    print_part((struct part) {528, "Disk drive", 10});
+
+    /* Messing around */
     struct {
         int number;
         char name[NAME_LEN+1];
