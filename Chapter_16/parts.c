@@ -14,15 +14,33 @@ struct part{
 struct part database[MAX_PART_COUNT];
 int current_quantity = 0;
 
-void add_part(int part_number, char *part_name, int init_quantity);
-void print_part(char *part_name);
-void update_quantity(char *part_name, int new_quantity);
+void add_part(void);
+void print_part(void);
+void update_quantity(void);
 void print_inventory(void);
 void print_part_struct(struct part part);
 
 int main(void){
 
+    char code;
 
+    for (;;) {
+        printf("Enter operation code: ");
+        scanf(" %c", &code);
+        while(getchar() != '\n'){
+            ;
+        }
+        switch(code) {
+            case 'i': add_part();
+                      break;
+            case 's': print_part();
+                      break;
+            case 'u': update_quantity();
+                      break;
+            case 'p': print_inventory();
+                      break;
+        }
+    }
 
 }
 
@@ -30,7 +48,20 @@ int main(void){
 /*
 ADD PART TO DATABASE
 */
-void add_part(int part_number, char *part_name, int init_quantity){
+void add_part(void){
+
+    int part_number;
+    char *part_name;
+    int init_quantity;
+
+    if (current_quantity == MAX_PART_COUNT){
+        printf("Database is full; can't add more parts.\n");
+        return;
+    }
+
+    printf("Enter part number: ");
+    scanf("%d", &part_number);
+
 
     /* Check to make sure part name is not already in list */
     for(int i = 0; i < current_quantity; i++){
@@ -58,7 +89,9 @@ void add_part(int part_number, char *part_name, int init_quantity){
 /*
 PRINT NAME OF PART
 */
-void print_part(char *part_name){
+void print_part(void){
+
+    char *part_name;
 
     /* Look for part */
     for(int i = 0; i < current_quantity; i++){
@@ -81,7 +114,10 @@ void print_part(char *part_name){
 /*
 CHANGE QUANTITY OF A PART
 */
-void update_quantity(char *part_name, int new_quantity){
+void update_quantity(void){
+
+    char *part_name;
+    int new_quantity;
 
     /* Look for part */
     for(int i = 0; i < current_quantity; i++){
