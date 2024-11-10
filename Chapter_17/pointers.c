@@ -9,6 +9,15 @@ char *concat(const char *s1, const char *s2);
 
 int main(void){
 
+    /* Dynamically allocated arrays*/
+    int *a;
+    int n = 5;
+    a = malloc(n * sizeof(int));
+    for(int i = 0; i < n; i ++){
+        a[i] = 0;
+    }
+
+
     /* Dynamically allocated strings */
     char *s1 = "I am a string. ";
     char *s2 = "I am also a string";
