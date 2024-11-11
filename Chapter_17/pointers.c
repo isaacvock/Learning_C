@@ -17,6 +17,7 @@ int main(void){
         a[i] = 0;
     }
 
+    free(a);
 
     /* Dynamically allocated strings */
     char *s1 = "I am a string. ";
