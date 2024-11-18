@@ -14,7 +14,7 @@ struct node {
 struct node *head = NULL;
 
 /* Add node to front of list */
-struct node *add_to_front(int data){
+void *add_to_front(int data){
 
     struct node *new = malloc(sizeof(struct node));
 
@@ -36,7 +36,7 @@ struct node *add_to_front(int data){
 }
 
 /* Add node to end of list */
-struct node *add_to_end(int data){
+void *add_to_end(int data){
 
     struct node *new = malloc(sizeof(struct node));
 
@@ -69,7 +69,7 @@ struct node *add_to_end(int data){
 }
 
 /* Remove node by value */
-void remove_by_value(int data){
+int remove_by_value(int data){
 
     struct node *current = head;
     struct node *last = head;
@@ -81,14 +81,28 @@ void remove_by_value(int data){
             last->next = current->next;
             free(current);
 
+            return 0;
+
         }
 
     }
 
+    return 1;
+
 }
 
 /* Print content of list */
-void print_list(){
+void print_list(void){
+
+    int count = 0;
+    struct node *current = head;
+    printf("\n");
+    printf("LIST CONTENTS\n");
+    while(current->next != NULL){
+
+        printf("Item %d is: %d\n", count, current -> value);
+
+    }
 
 
 
@@ -101,7 +115,7 @@ void print_options(){
     printf("1: Add to end of list\n");
     printf("2: Remove by value\n");
     printf("3: Print contents of list\n");
-    printf("4: Exit\n")
+    printf("4: Exit\n");
 
 }
 
@@ -109,36 +123,49 @@ int main(void){
 
     int option;
     int data;
+    int outcome;
 
     for(;;){
 
         printf("Welcome to your linked list hell!\n");
         print_options();
-        printf("Enter option: \n");
+        printf("Enter option: ");
         scanf("%d", &option);
 
         switch(option){
 
             case 0:
                 // Add to front
-                printf("What value would you like to add to front?\n");
+                printf("Enter value you would like to add to front: ");
                 scanf("%d", &data);
-                add_to_front(data)
+                add_to_front(data);
 
                 break;
 
             case 1:
                 // Add to end
+                printf("Enter value you would like to add to end: ");
+                scanf("%d", &data);
+                add_to_end(data);
 
                 break;
             
             case 2:
                 // Remove by value
+                printf("Enter value you would like to remove: ");
+                scanf("%d", &data);
+                outcome = remove_by_value(data);
+
+                if(outcome == 1){
+                    printf("Failed to find requested value! Nothing was removed");
+                }
+
 
                 break;
 
             case 3:
                 //Print contents
+                print_list();
 
                 break;
 
