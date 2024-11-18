@@ -71,40 +71,83 @@ void *add_to_end(int data){
 /* Remove node by value */
 int remove_by_value(int data){
 
-    struct node *current = head;
+    if(head == NULL){
+        printf("Nothing to remove!");
+        return 1;
+    }
+    
+    
+    struct node *current = head->next;
     struct node *last = head;
 
-    while(current->next != NULL){
+    if(head -> value == data){
 
-        if(current->value == data){
+        free(last);
+        head = current;
 
-            last->next = current->next;
-            free(current);
+    }else{
 
-            return 0;
+
+        for(;;){
+
+            if(current->value == data){
+
+                last->next = current->next;
+                free(current);
+
+                return 0;
+
+            }
+
+            last = last -> next;
+            current = current -> next;
+
+            if(current == NULL){
+                break;
+            }
 
         }
 
+        return 1;
+
     }
 
-    return 1;
 
 }
 
 /* Print content of list */
 void print_list(void){
 
-    int count = 0;
-    struct node *current = head;
     printf("\n");
-    printf("LIST CONTENTS\n");
-    while(current->next != NULL){
 
-        printf("Item %d is: %d\n", count, current -> value);
+    if(head == NULL){
+
+        printf("List is currently empty!\n");
+
+    }else{
+
+        int count = 0;
+        struct node *current = head;
+        
+        printf("LIST CONTENTS\n");
+        for(;;){
+
+            printf("Item %d is: %d\n", count, current -> value);
+
+            if(current -> next == NULL){
+                break;
+            }else{
+                current = current -> next;
+            }
+
+            count++;
+
+        }
+
 
     }
 
-
+    printf("\n");
 
 }
 
