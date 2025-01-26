@@ -7,12 +7,15 @@ int main(int argc, char *argv[]){
 
     // Open bam file
     samFile *fp_in = hts_open(argv[1], "r");
+    printf("Opened bam file\n");
 
     // Read header
     bam_hdr_t *bamHdr = sam_hdr_read(fp_in); 
+    printf("Read header\n");
 
     // Initialize an alignment
     bam1_t *aln = bam_init1();
+    printf("Initialized alignment\n");
 
     char *chrom = argv[2];
     int locus = atoi(argv[3]);
@@ -36,6 +39,10 @@ int main(int argc, char *argv[]){
 
         //Mapping quality
         uint32_t q2 = aln->core.qual;
+
+        // CIGAR string
+        uint32_t *cigar = bam_get_cigar(aln);
+
 
         char *qseq = (char *)malloc(len);
 
