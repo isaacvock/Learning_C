@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>>
+#include <stdbool.h>
 #include "hash.h"
+#include <cstdint>
 
 // hash table entry
 typedef struct {
@@ -17,47 +18,52 @@ struct ht {
     size_t length; // number of items in hash table
 };
 
-void exit_nomem(void) {
-    fprintf(stderr, "out of memory\n");
-    exit(1);
+
+#define INITIAL_CAPACITY 16
+
+ht* ht_create(void){
+
+    // Allocate space for hash table struct.
+    ht* table = malloc(sizeof(ht));
+    if(table == NULL){
+        return NULL;
+    }
+    table->length = 0;
+    table->capacity = INITIAL_CAPACITY;
+
+    // Allocate (zero'd) space for entry buckets.
+    table->entries = calloc(table->capacity, sizeof(ht_entry));
+    if(table->entries == NULL){
+        free(table); // error, free table before we return!
+        retrun NULL;
+    }
+
+    return table;
 }
 
-int main(void){
+void ht_destroy(ht* table){
 
-    ht* counts = ht_create();
-    if (counts == NULL){
-        exit_nomem();
+    // First free allocated keys
+    for(size_t i = 0; i < table->capacity; i++){
+        free((void*)table->entries[i].key);
     }
 
-    // Read next word from stdin (at most 100 chars)
-    char word[101];
-    while(scanf("%100s", word) != EOF){
-        // Look up word.
-        void* value = ht_get(counts, word);
-        if(value != NULL){
-            //Already exists, increment int that value points to.
-            int* pcount = (int*)value;
-            (*pcount)++;
-            continue;
-        }
+    // Then free entries array and table itself.
+    free(table->entries);
+    free(table);
+}
 
-        // WOrd not found, allocate space for new int and set to 1
-        int* pcount = malloc(sizeof(int));
-        if(pcount == NULL){
-            exit_nomem();
-        }
-        *pcount = 1;
-        if(ht_set(counts, word, pcount) == NULL){
-            exit_nomem();
-        }
+
+#define FNV_OFFSET 14695981039346656037UL
+#define FNV_PRIME 1099511628211UL
+
+// Return 64-bit FNV-1a hash for key (NUL-temrinated). See description:
+// https://en.wikipedia.org/wiki/Fowler–Noll–Vo_hash_function
+static uint64_t hash_key(const char* key){
+    uint64_t hash = FNV_OFFSET;
+    for (const char* p = key; *p; p++) {
+        hash ^= (uint64_t)(unsigned char)(*p);
+        hash *= FNV_PRIME;
     }
-
-    // Print out words and frequencies, freeing values as we go.
-    hti it = ht_iterator(counts);
-    while(ht_next(&it)){
-        printf("%s %d\n", it.key, *(int*)it.value)
-    }
-
-
-
+    return hash;
 }
