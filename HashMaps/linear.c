@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-
 #define STR_LEN 50
 
 typedef struct{

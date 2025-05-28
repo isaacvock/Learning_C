@@ -1,0 +1,7 @@
+P=testlibs
+OBJECTS=
+CFLAGS = -I/usr/local/include -g -Wall -O3
+LDLIBS= -L/usr/local/lib -lhts
+CC=c99
+
+$(P): $(OBJECTS)
